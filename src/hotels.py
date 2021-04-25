@@ -16,7 +16,7 @@ class Hotel:
         for the given dates and given client type
         """
 
-        def calculate_total(regular_price, weekend_price, dates):
+        def calculate_total(weekend_price, regular_price, dates):
 
             price = 0
             for date in dates:
@@ -30,17 +30,16 @@ class Hotel:
 
         if client_type == 'Regular':
             self.total_price = calculate_total(
-                dates, self.price_weekend_reg, self.price_week_reg)
+                self.price_weekend_reg, self.price_week_reg, dates)
         else:
             self.total_price = calculate_total(
-                dates, self.price_weekend_rew, self.price_week_rew)
+                self.price_weekend_rew, self.price_week_rew, dates)
 
 class HotelSorter:
 
     def __init__(self, input, hotel_list):
         self.hotel_list = hotel_list
         self.client_type, self.dates = self.input_parser(input)
-
 
     def input_parser(self, input):
         """
@@ -58,3 +57,19 @@ class HotelSorter:
                  else False for date in dates]
 
         return client_type, dates
+
+    def find_best_hotel(self):
+        """
+        Method that determines the least expensive hotel to stay for the given
+        client type and staying dates
+        """
+
+        # We calculate the total stay price for each hotel
+        for hotel in self.hotel_list:
+            hotel.calculate_stay_price(self.dates, self.client_type)
+
+        # Based on the lowest price and then the highest classification, we sort the hotels
+        self.hotel_list.sort(key=lambda x: (-x.total_price, x.classification))
+
+        # We return the name of the best hotel according to the sorting
+        return hotel_list[0].name
