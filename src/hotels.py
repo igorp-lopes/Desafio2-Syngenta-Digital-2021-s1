@@ -4,4 +4,11 @@ class Hotel:
         self.name = name
         self.classification = classification
         self.tax_week = tax_week
-        self.tax_weekend = tax_weekeend
+        self.tax_weekend = tax_weekend
+
+
+class HotelSorter:
+
+    def __init__(self, input, hotel_list):
+        self.hotel_list = hotel_list
+        pass
