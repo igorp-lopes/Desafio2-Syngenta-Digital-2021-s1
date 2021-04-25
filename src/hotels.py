@@ -53,7 +53,7 @@ class HotelSorter:
         dates = re.findall(r'\(.*?\)', input)
 
         # We transform our dates relative to their respective weekday, False for weekdays and True for weekend days
-        dates = [True if date == ('(sat)' or '(sun)')
+        dates = [True if (date == '(sat)') or (date == '(sun)')
                  else False for date in dates]
 
         return client_type, dates
@@ -69,7 +69,7 @@ class HotelSorter:
             hotel.calculate_stay_price(self.dates, self.client_type)
 
         # Based on the lowest price and then the highest classification, we sort the hotels
-        self.hotel_list.sort(key=lambda x: (x.total_price, x.classification))
+        self.hotel_list.sort(key=lambda x: (x.total_price, -x.classification))
 
         # We return the name of the best hotel according to the sorting
         return self.hotel_list[0].name
