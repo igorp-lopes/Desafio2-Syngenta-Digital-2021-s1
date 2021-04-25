@@ -1,9 +1,15 @@
 from hotels import Hotel, HotelSorter
 
-sorting = HotelSorter(
-    "Rewards: 26Mar2009(thur), 27Mar2009(fri), 28Mar2009(sat)", [])
+# We define the hotels
+hotel_list = [Hotel("Lakewood", 3, 110, 90, 80, 80), Hotel(
+    "Bridgewood", 4, 160, 60, 110, 50), Hotel("Ridgewood", 5, 220, 150, 100, 40)]
 
-hotel = Hotel("Lakewood", 3, 110, 90, 80, 80)
-hotel.calculate_stay_price([False, False, False], 'Regular')
+# We receive the input
+input_ = input('Entre com a informacao da sua reserva:\n')
 
-temp = 0
+# Based on the input, we determine the ideal hotel to choose
+ht_sorter = HotelSorter(input_, hotel_list)
+
+best = ht_sorter.find_best_hotel()
+
+print(best)
