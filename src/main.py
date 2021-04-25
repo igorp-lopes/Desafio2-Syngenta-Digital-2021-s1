@@ -1,7 +1,9 @@
 from hotels import Hotel, HotelSorter
 
 sorting = HotelSorter(
-    "Regular: 16Mar2009(mon), 17Mar2009(tues), 18Mar2009(wed)", [])
+    "Rewards: 26Mar2009(thur), 27Mar2009(fri), 28Mar2009(sat)", [])
 
-sorting.input_parser(
-    "Regular: 16Mar2009(mon), 17Mar2009(tues), 18Mar2009(wed)")
+hotel = Hotel("Lakewood", 3, 110, 90, 80, 80)
+hotel.calculate_stay_price([False, False, False], 'Regular')
+
+temp = 0
