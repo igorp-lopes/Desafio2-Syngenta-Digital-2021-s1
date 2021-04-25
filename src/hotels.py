@@ -1,28 +1,39 @@
 import re
 class Hotel:
 
-    def __init__(self, name, classification, price_week, price_weekend):
+    def __init__(self, name, classification, price_week_reg, price_weekend_reg, price_week_rew, price_weekend_rew):
         self.name = name
         self.classification = classification
-        self.price_week = price_week
-        self.price_weekend = price_weekend
+        self.price_week_reg = price_week_reg
+        self.price_weekend_reg = price_weekend_reg
+        self.price_week_rew = price_week_rew
+        self.price_weekend_rew = price_weekend_rew
         self.total_price = 0
 
-    def calculate_stay_price(self, dates):
+    def calculate_stay_price(self, dates, client_type):
         """
         Method that determines the total price paid for staying at the hotel
-        for the given dates
+        for the given dates and given client type
         """
 
-        price = 0
-        for date in dates:
-            # If the current day is a weekend day
-            if(date):
-                price += self.price_weekend
-            else:
-                price += self.price_week
+        def calculate_total(regular_price, weekend_price, dates):
 
-        self.total_price = price
+            price = 0
+            for date in dates:
+                # If the current day is a weekend day
+                if(date):
+                    price += weekend_price
+                else:
+                    price += regular_price
+
+            return price
+
+        if client_type == 'Regular':
+            self.total_price = calculate_total(
+                dates, self.price_weekend_reg, self.price_week_reg)
+        else:
+            self.total_price = calculate_total(
+                dates, self.price_weekend_rew, self.price_week_rew)
 
 class HotelSorter:
 
