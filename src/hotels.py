@@ -69,7 +69,7 @@ class HotelSorter:
             hotel.calculate_stay_price(self.dates, self.client_type)
 
         # Based on the lowest price and then the highest classification, we sort the hotels
-        self.hotel_list.sort(key=lambda x: (-x.total_price, x.classification))
+        self.hotel_list.sort(key=lambda x: (x.total_price, x.classification))
 
         # We return the name of the best hotel according to the sorting
-        return hotel_list[0].name
+        return self.hotel_list[0].name
