@@ -12,8 +12,8 @@ class HotelSorter:
 
     def __init__(self, input, hotel_list):
         self.hotel_list = hotel_list
-        self.input = input
-        pass
+        self.client_type, self.dates = self.input_parser(input)
+
 
     def input_parser(self, input):
         """
@@ -26,4 +26,8 @@ class HotelSorter:
         # Extracting the dates between brackets using regex
         dates = re.findall(r'\(.*?\)', input)
 
-        # We transform our dates
+        # We transform our dates relative to their respective weekday, False for weekdays and True for weekend days
+        dates = [True if date == ('(sat)' or '(sun)')
+                 else False for date in dates]
+
+        return client_type, dates
